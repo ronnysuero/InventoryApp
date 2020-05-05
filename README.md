@@ -70,7 +70,7 @@ app.UseSqlServerAutoMigrations();
 - Username: sa
 - Password: 123456
 
-## Meta
+## Author
 
 Ronny Zapata – ronnysuero@gmail.com
 
