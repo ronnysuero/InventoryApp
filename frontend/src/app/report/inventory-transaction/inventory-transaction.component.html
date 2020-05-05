@@ -1,0 +1,123 @@
+<p-table
+  [value]="data"
+  [autoLayout]="true"
+  styleClass="table table-bordered"
+  [responsive]="true"
+  selectionMode="single"
+>
+  <ng-template pTemplate="caption">
+    <div class="row">
+      <div class="col-md-6" style="text-align: left;"></div>
+      <div class="col-md-6" style="text-align: right;">
+        <button type="button" (click)="exportExcel()" class="btn btn-success">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Artículo</th>
+      <th>Almacén</th>
+      <th>Area</th>
+      <th>SKU</th>
+      <th><span class="pull-right">Recuento de stock</span></th>
+      <th><span class="pull-right">Costo de inventario</span></th>
+      <th><span class="pull-right">Cantidad vendida</span></th>
+      <th><span class="pull-right">Ventas totales</span></th>
+      <th><span class="pull-right">Beneficios brutos de ventas</span></th>
+      <th><span class="pull-right">Total de devoluciones utilizables</span></th>
+      <th>
+        <span class="pull-right">Devoluciones totales inutilizables</span>
+      </th>
+      <th><span class="pull-right">Stock dañado total</span></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>{{ item.Name }}</td>
+      <td>{{ item.LocationName }}</td>
+      <td>{{ item.AreaName }}</td>
+      <td>{{ item.SKU }}</td>
+      <td>
+        <span class="pull-right">{{ item.StockCount | number: "1.2-2" }}</span>
+      </td>
+      <td>
+        <span class="pull-right">{{ item.StockCost | number: "1.2-2" }}</span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ item.QuantitySold | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">{{ item.TotalSales | number: "1.2-2" }}</span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ item.GrossSalesProfits | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ item.TotalUsableReturns | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ item.TotalUnusableReturns | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ item.TotalDamagedStock | number: "1.2-2" }}
+        </span>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="footer" let-item>
+    <tr>
+      <td colspan="4">Totales:</td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("StockCount") | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("StockCost") | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("QuantitySold") | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("TotalSales") | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("GrossSalesProfits") | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("TotalUsableReturns") | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("TotalUnusableReturns") | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ calculateSumData("TotalDamagedStock") | number: "1.2-2" }}
+        </span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,25 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
+  <a class="navbar-brand" href="javascript:void(0)"></a>
+  <ul class="nav navbar-nav hidden-md-down">
+    <li class="nav-item">
+      <a class="nav-link navbar-toggler sidebar-toggler" href="javascript:void(0)">&#9776;</a>
+    </li>
+  </ul>
+  <ul class="nav ml-auto">
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+        aria-expanded="false" dropdownToggle>
+        <span class="hidden-md-down" style="color: #c0cadd">{{username}}</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right mr-2" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center">
+          <strong>Account</strong>
+        </div>
+        <div class="divider"></div>
+        <a class="dropdown-item" (click)="service.logout()" href="javascript:void(0)">
+          <i class="fa fa-lock" aria-hidden="true"></i> Cerrar Sesión</a>
+      </div>
+    </li>
+  </ul>
+</header>

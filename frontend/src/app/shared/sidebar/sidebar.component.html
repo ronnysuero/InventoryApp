@@ -1,0 +1,29 @@
+  <div class="sidebar">
+    <nav class="sidebar-nav">
+      <ul class="nav">
+        <ng-container *ngFor="let menu of service.menus">
+          <ng-container *ngIf="menu.Children.length > 0; else single">
+            <li #current class="nav-item nav-dropdown">
+              <a class="nav-link nav-dropdown-toggle" (click)="collapseMenu(current)" href="javascript:void(0)">
+                <i class="{{!menu.Icon? 'fa': menu.Icon}}" aria-hidden="true"></i>{{menu.Name}}
+              </a>
+              <ul class="nav-dropdown-items">
+                <li *ngFor="let item of menu.Children" class="nav-item">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="item.Url">
+                    <i class="{{!item.Icon? 'fa': item.Icon}}" aria-hidden="true"></i>{{item.Name}}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ng-container>
+          <ng-template #single>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="menu.Url">
+                <i class="{{!menu.Icon? 'fa': menu.Icon}}" aria-hidden="true"></i> {{menu.Name}}
+              </a>
+            </li>
+          </ng-template>
+        </ng-container>
+      </ul>
+    </nav>
+  </div>

@@ -1,0 +1,139 @@
+<form-template
+  [adding]="service.state == service.MODEL_STATE.Add"
+  [busy]="service.busy"
+  [(okAndNew)]="service.saveAndNew"
+  [showOkAndNew]="false"
+  [formTitle]="
+    service.state == service.MODEL_STATE.Add
+      ? 'Agregar nueva transacción'
+      : 'Editar transacción'
+  "
+  [form]="crudForm"
+  [scrollTopOnInit]="false"
+>
+  <form #crudForm="ngForm">
+    <div class="row" *ngIf="service.state == service.MODEL_STATE.Add">
+      <div class="col-md-6" input-wrapper labelName="Almacén:">
+        <ng-select
+          acFocus
+          name="location"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.locations.List"
+          bindLabel="Name"
+          bindValue="LocationId"
+          [(ngModel)]="service.model.LocationId"
+          notFoundText="Sin registros"
+          [clearable]="false"
+          required
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" input-wrapper labelName="Fecha:">
+        <div class="input-group">
+          <input
+            ngbDatepicker
+            class="form-control"
+            placeholder="dd/mm/yyyy"
+            name="fechainicio"
+            [(ngModel)]="service.model.TransactionDate"
+            #transactionDate="ngbDatepicker"
+            required
+          />
+          <span class="input-group-btn">
+            <button
+              type="button"
+              (click)="transactionDate.toggle()"
+              class="pointer btn btn-outline-primary btn-search"
+            >
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        input-wrapper
+        labelName="Tipo:"
+        *ngIf="service.state == service.MODEL_STATE.Add"
+      >
+        <ng-select
+          name="transactionType"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.transactionTypes.List"
+          bindLabel="Name"
+          bindValue="TransactionTypeId"
+          [(ngModel)]="service.model.TransactionTypeId"
+          notFoundText="Sin registros"
+          [clearable]="false"
+          required
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" input-wrapper labelName="Cantidad:">
+        <input
+          number
+          currencyMask
+          [range]="[0, 9999999999]"
+          class="form-control input-input"
+          name="quantity"
+          [min]="0.01"
+          [(ngModel)]="service.model.Quantity"
+          required
+        />
+      </div>
+      <ng-container [ngSwitch]="service.model.TransactionTypeId">
+        <ng-container *ngSwitchCase="TRANSACTION_TYPE.NewStock">
+          <div class="col-md-6" input-wrapper labelName="Costo unitario:">
+            <input
+              number
+              currencyMask
+              [max]="9999999999"
+              class="form-control input-input"
+              name="unitCost"
+              [(ngModel)]="service.model.UnitCost"
+            />
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <div
+            class="col-md-6"
+            input-wrapper
+            [labelName]="
+              TRANSACTION_TYPE.CustomerSale || TRANSACTION_TYPE.DamagedStock
+                ? 'Venta unitaria:'
+                : 'Reembolso unitario:'
+            "
+          >
+            <input
+              number
+              currencyMask
+              [max]="9999999999"
+              class="form-control input-input"
+              name="unitSale"
+              [(ngModel)]="service.model.UnitSale"
+            />
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Comentarios:">
+        <textarea
+          type="text"
+          rows="2"
+          class="form-control input-textarea"
+          name="comments"
+          [(ngModel)]="service.model.Comments"
+          maxlength="250"
+        ></textarea>
+      </div>
+    </div>
+  </form>
+  <ng-container content-type="custom-button"></ng-container>
+</form-template>

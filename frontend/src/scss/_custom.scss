@@ -1,0 +1,162 @@
+body,
+td,
+p,
+th,
+td,
+tr,
+select,
+input,
+button,
+textarea,
+label,
+div {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ng-option > a,
+.ng-option > a:visited,
+.ng-option > a:active {
+  text-decoration: none;
+}
+
+@media (min-width: 992px) {
+  .modal-xxl {
+    max-width: 97%;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-xl {
+    max-width: 80%;
+  }
+}
+
+.custom-container-b {
+  padding-bottom: 1rem;
+}
+
+.modal-black {
+  color: #fff;
+  background-color: #1d5791;
+}
+
+.navbar {
+  .form-inline {
+    margin-top: 1px;
+
+    .input-group {
+      float: none;
+    }
+
+    .btn {
+      vertical-align: top;
+      border: 0;
+    }
+
+    .form-control {
+      float: none !important;
+      color: $navbar-color;
+      vertical-align: top;
+      background-color: darken($gray-dark, 10%);
+      border-color: darken($gray-dark, 10%);
+      margin-left: -2px;
+
+      &::placeholder {
+        color: $navbar-color;
+      }
+    }
+
+    .form-control::-webkit-input-placeholder {
+      color: $navbar-color;
+    }
+
+    .form-control:-moz-placeholder {
+      color: $navbar-color;
+    }
+
+    .form-control::-moz-placeholder {
+      color: $navbar-color;
+    }
+
+    .form-control:-ms-input-placeholder {
+      color: $navbar-color;
+    }
+
+    .input-group-btn {
+      height: 40px;
+      background-color: darken($gray-dark, 10%);
+      padding: 5px;
+
+      .btn {
+        // margin: 2px;
+        color: #fff;
+        background-color: darken($gray-dark, 10%);
+
+        &.dropdown-toggle {
+          background-color: $gray;
+        }
+      }
+    }
+  }
+
+  .avatar {
+    img {
+      width: 34px;
+      border-radius: 0 !important;
+    }
+  }
+}
+
+.card-block-custom {
+  padding-bottom: 0.1rem;
+}
+
+.aside-menu .nav.nav-tabs {
+  background-color: $gray-lighter;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.close-red:hover {
+  color: red !important;
+}
+
+.breadcrumb li a:hover {
+  text-decoration: none;
+}
+
+.actions-button {
+  width: 90px;
+  text-align: center;
+}
+
+.sidebar .nav .nav-item .nav-link i {
+  color: #384042 !important;
+}
+
+body .nav-tabs .nav-link.active,
+body .nav-tabs .nav-link {
+  border-radius: 0;
+}
+
+.card {
+  margin-bottom: 0;
+}
+
+.btn-secondary.disabled,
+.fc button.disabled,
+.btn-secondary:disabled,
+.fc button:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.sidebar .nav .nav-item.nav-dropdown.open {
+  background: #cdd7e9;
+}
+
+.sidebar .nav .nav-item .nav-link.active {
+  background: #9abbd6;
+}

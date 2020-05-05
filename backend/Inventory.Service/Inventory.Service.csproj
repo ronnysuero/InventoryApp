@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <Authors>Ronny Zapata</Authors>
+    <AssemblyName>Inventory.Service</AssemblyName>
+    <RootNamespace>Inventory.Service</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="UtilsCore.Filter.Json" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inventory.EntityFrameworkCore\Inventory.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Inventory.Entity\Inventory.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

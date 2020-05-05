@@ -1,0 +1,35 @@
+<list-template
+  [showCardLayout]="false"
+  [showHeader]="false"
+  [showFooter]="false"
+  #list
+>
+  <br />
+  <div class="row">
+    <div class="col-md-4">
+      <br />
+      <h6 style="vertical-align: middle;">
+        Stock disponible:
+        <span class="badge badge-secondary">{{ service.quantity }}</span>
+      </h6>
+    </div>
+    <div class="col-md-8" *ngIf="service.quantity > 0">
+      <div class="pull-right">
+        <button
+          class="btn btn-primary"
+          style="margin-top: 10px;"
+          (click)="removeInventory(list)"
+        >
+          Remover existencia
+        </button>
+        <button
+          class="btn btn-warning"
+          style="margin-top: 10px;"
+          (click)="addTransfer(list)"
+        >
+          Transferir inventario
+        </button>
+      </div>
+    </div>
+  </div>
+</list-template>

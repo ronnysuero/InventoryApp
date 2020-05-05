@@ -1,0 +1,177 @@
+<list-template
+  listTitle="Reportes"
+  [showFooter]="false"
+  [showAddButton]="false"
+>
+  <div class="row">
+    <div class="col-md-4" input-wrapper labelName="Reporte:">
+      <ng-select
+        name="reportType"
+        placeholder="Seleccionar"
+        class="custom"
+        [items]="service.cacheData.defaultData.List.Reports"
+        bindLabel="Name"
+        bindValue="Id"
+        [(ngModel)]="service.model.ReportType"
+        notFoundText="Sin registros"
+        clearAllText="Limpiar"
+        [clearable]="false"
+        required
+      >
+      </ng-select>
+    </div>
+    <div class="col-md-2">
+      <button
+        style="margin-top: 28px;"
+        class="btn btn-primary"
+        [disabled]="!service.model.ReportType"
+        (click)="print()"
+      >
+        Generar reporte
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <ng-container [ngSwitch]="service.model.ReportType">
+      <ng-container *ngSwitchCase="REPORT.InventoryTransactions">
+        <div class="col-md-3" input-wrapper labelName="Almacenes:">
+          <ng-select
+            name="locations"
+            placeholder="Seleccionar"
+            class="custom"
+            [items]="service.cacheData.locations.List"
+            [multiple]="true"
+            bindLabel="Name"
+            [closeOnSelect]="false"
+            bindValue="LocationId"
+            [(ngModel)]="service.model.Locations"
+            [selectableGroup]="true"
+            groupBy="group"
+          >
+            <ng-template
+              ng-optgroup-tmp
+              let-item="item"
+              let-item$="item$"
+              let-index="index"
+            >
+              <input
+                id="item-{{ index }}"
+                type="checkbox"
+                [ngModel]="item$.selected"
+              />
+              {{ item.group | uppercase }}
+            </ng-template>
+            <ng-template
+              ng-option-tmp
+              let-item="item"
+              let-item$="item$"
+              let-index="index"
+            >
+              <input
+                id="item-{{ index }}"
+                type="checkbox"
+                [ngModel]="item$.selected"
+              />
+              {{ item.Name }}
+            </ng-template>
+          </ng-select>
+        </div>
+        <div class="col-md-3" input-wrapper labelName="Areas:">
+          <ng-select
+            name="areas"
+            placeholder="Seleccionar"
+            class="custom"
+            [items]="service.cacheData.areas.List"
+            [multiple]="true"
+            bindLabel="Name"
+            [closeOnSelect]="false"
+            bindValue="AreaId"
+            [(ngModel)]="service.model.Areas"
+            [selectableGroup]="true"
+            groupBy="group"
+          >
+            <ng-template
+              ng-optgroup-tmp
+              let-item="item"
+              let-item$="item$"
+              let-index="index"
+            >
+              <input
+                id="item-{{ index }}"
+                type="checkbox"
+                [ngModel]="item$.selected"
+              />
+              {{ item.group | uppercase }}
+            </ng-template>
+            <ng-template
+              ng-option-tmp
+              let-item="item"
+              let-item$="item$"
+              let-index="index"
+            >
+              <input
+                id="item-{{ index }}"
+                type="checkbox"
+                [ngModel]="item$.selected"
+              />
+              {{ item.Name }}
+            </ng-template>
+          </ng-select>
+        </div>
+        <div class="col-md-3" input-wrapper labelName="Fecha de inicio:">
+          <div class="input-group">
+            <input
+              ngbDatepicker
+              class="form-control"
+              placeholder="dd/mm/yyyy"
+              name="startDate"
+              [(ngModel)]="service.model.StartDate"
+              #startDate="ngbDatepicker"
+              required
+            />
+            <span class="input-group-btn">
+              <button
+                type="button"
+                (click)="startDate.toggle()"
+                class="pointer btn btn-outline-primary btn-search"
+              >
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-3" input-wrapper labelName="Fecha final:">
+          <div class="input-group">
+            <input
+              ngbDatepicker
+              class="form-control"
+              placeholder="dd/mm/yyyy"
+              name="endDate"
+              [(ngModel)]="service.model.EndDate"
+              #endDate="ngbDatepicker"
+              required
+            />
+            <span class="input-group-btn">
+              <button
+                type="button"
+                (click)="endDate.toggle()"
+                class="pointer btn btn-outline-primary btn-search"
+              >
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <inventory-transaction
+        [data]="data"
+        *ngIf="showInventoryTransaction"
+      ></inventory-transaction>
+      <current-stock [data]="data" *ngIf="showCurrentStock"></current-stock>
+    </div>
+  </div>
+</list-template>

@@ -1,0 +1,99 @@
+<form-template
+  [adding]="service.state == service.MODEL_STATE.Add"
+  [busy]="service.busy"
+  [(okAndNew)]="service.saveAndNew"
+  [showOkAndNew]="false"
+  formTitle="Editar artículo"
+  [form]="crudForm"
+>
+  <form #crudForm="ngForm">
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Nombre:">
+        <input
+          acFocus
+          type="text"
+          maxlength="30"
+          class="form-control input-input"
+          name="nombre"
+          [(ngModel)]="service.model.Name"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Descripción:">
+        <textarea
+          type="text"
+          rows="2"
+          class="form-control input-textarea"
+          name="address"
+          [(ngModel)]="service.model.Summary"
+          maxlength="250"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" input-wrapper labelName="SKU:">
+        <input
+          type="text"
+          maxlength="30"
+          class="form-control input-input"
+          name="sku"
+          [(ngModel)]="service.model.SKU"
+        />
+      </div>
+      <div
+        class="col-md-6"
+        input-wrapper
+        labelName="Stock mínimo de existencia:"
+      >
+        <input
+          number
+          currencyMask
+          [range]="[0, 999999999999]"
+          class="form-control input-input"
+          name="minimumStockCount"
+          [(ngModel)]="service.model.MinimumStockCount"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" input-wrapper labelName="Area:">
+        <ng-select
+          name="area"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.areas.List"
+          bindLabel="Name"
+          bindValue="AreaId"
+          [(ngModel)]="service.model.AreaId"
+          notFoundText="Sin registros"
+          [clearable]="true"
+          clearAllText="Limpiar"
+        >
+        </ng-select>
+      </div>
+      <div class="col-md-6" input-wrapper labelName="Fabricante:">
+        <ng-select
+          name="manufacturer"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.manufacturers.List"
+          bindLabel="Name"
+          bindValue="ManufacturerId"
+          [(ngModel)]="service.model.ManufacturerId"
+          notFoundText="Sin registros"
+          [clearable]="true"
+          clearAllText="Limpiar"
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="mt-2 mb-2">
+      <transaction></transaction>
+    </div>
+  </form>
+  <ng-container content-type="custom-button"></ng-container>
+</form-template>
+<br />

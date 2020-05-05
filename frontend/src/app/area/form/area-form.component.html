@@ -1,0 +1,29 @@
+<form-template
+  [adding]="service.state == service.MODEL_STATE.Add"
+  [busy]="service.busy"
+  [(okAndNew)]="service.saveAndNew"
+  [showOkAndNew]="false"
+  [formTitle]="
+    service.state == service.MODEL_STATE.Add
+      ? 'Agregar nueva area'
+      : 'Editar area'
+  "
+  [form]="crudForm"
+>
+  <form #crudForm="ngForm">
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Nombre:">
+        <input
+          acFocus
+          type="text"
+          maxlength="30"
+          class="form-control input-input"
+          name="nombre"
+          [(ngModel)]="service.model.Name"
+          required
+        />
+      </div>
+    </div>
+  </form>
+  <ng-container content-type="custom-button"></ng-container>
+</form-template>

@@ -1,0 +1,238 @@
+<form-template
+  [adding]="service.state == service.MODEL_STATE.Add"
+  [busy]="service.busy"
+  [(okAndNew)]="service.saveAndNew"
+  [showOkAndNew]="false"
+  [formTitle]="
+    service.state == service.MODEL_STATE.Add
+      ? 'Agregar nuevo artículo'
+      : 'Editar artículo'
+  "
+  [form]="crudForm"
+>
+  <form #crudForm="ngForm">
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Nombre:">
+        <input
+          acFocus
+          type="text"
+          maxlength="30"
+          class="form-control input-input"
+          name="nombre"
+          [(ngModel)]="service.model.Name"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Descripción:">
+        <textarea
+          type="text"
+          rows="2"
+          class="form-control input-textarea"
+          name="address"
+          [(ngModel)]="service.model.Summary"
+          maxlength="250"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" input-wrapper labelName="SKU:">
+        <input
+          type="text"
+          maxlength="30"
+          class="form-control input-input"
+          name="sku"
+          placeholder="Autogenerado si se deja en blanco"
+          [(ngModel)]="service.model.SKU"
+        />
+      </div>
+      <div
+        class="col-md-6"
+        input-wrapper
+        labelName="Stock mínimo de existencia:"
+      >
+        <input
+          number
+          currencyMask
+          [range]="[0, 999999999999]"
+          class="form-control input-input"
+          name="minimumStockCount"
+          [(ngModel)]="service.model.MinimumStockCount"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" input-wrapper labelName="Area:">
+        <ng-select
+          name="area"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.areas.List"
+          bindLabel="Name"
+          bindValue="AreaId"
+          [(ngModel)]="service.model.AreaId"
+          notFoundText="Sin registros"
+          clearAllText="Limpiar"
+        >
+          <ng-template ng-footer-tmp>
+            <div class="ng-option disabled">
+              <a href="javascript:void(0)" (click)="addNewArea()">
+                <i class="fa fa-plus" aria-hidden="true"></i> agregar nueva area
+              </a>
+            </div>
+          </ng-template>
+        </ng-select>
+      </div>
+      <div class="col-md-4" input-wrapper labelName="Fabricante:">
+        <ng-select
+          name="manufacturer"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.manufacturers.List"
+          bindLabel="Name"
+          bindValue="ManufacturerId"
+          [(ngModel)]="service.model.ManufacturerId"
+          notFoundText="Sin registros"
+          clearAllText="Limpiar"
+        >
+          <ng-template ng-footer-tmp>
+            <div class="ng-option disabled">
+              <a href="javascript:void(0)" (click)="addNewManufacturer()">
+                <i class="fa fa-plus" aria-hidden="true"></i> agregar nueva
+                fabricante
+              </a>
+            </div>
+          </ng-template>
+        </ng-select>
+      </div>
+      <div class="col-md-4" input-wrapper labelName="Almacén:">
+        <ng-select
+          name="location"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.locations.List"
+          bindLabel="Name"
+          bindValue="LocationId"
+          [(ngModel)]="service.model.Transaction.LocationId"
+          notFoundText="Sin registros"
+          [clearable]="false"
+          required
+        >
+          <ng-template ng-footer-tmp>
+            <div class="ng-option disabled">
+              <a href="javascript:void(0)" (click)="addNewLocation()">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                agregar nuevo almacén
+              </a>
+            </div>
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+    <br />
+    <tabset>
+      <tab heading="Transacción">
+        <div class="row">
+          <div class="col-md-6" input-wrapper labelName="Fecha:">
+            <div class="input-group">
+              <input
+                ngbDatepicker
+                class="form-control"
+                placeholder="dd/mm/yyyy"
+                name="fechainicio"
+                [(ngModel)]="service.model.Transaction.TransactionDate"
+                #transactionDate="ngbDatepicker"
+                required
+              />
+              <span class="input-group-btn">
+                <button
+                  type="button"
+                  (click)="transactionDate.toggle()"
+                  class="pointer btn btn-outline-primary btn-search"
+                >
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6" input-wrapper labelName="Tipo:">
+            <ng-select
+              name="transactionType"
+              placeholder="Seleccionar"
+              class="custom"
+              [items]="service.cacheData.transactionTypes.List"
+              bindLabel="Name"
+              bindValue="TransactionTypeId"
+              (change)="onChangeTransactionType()"
+              [(ngModel)]="service.model.Transaction.TransactionTypeId"
+              notFoundText="Sin registros"
+              [clearable]="false"
+              required
+            >
+            </ng-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6" input-wrapper labelName="Cantidad:">
+            <input
+              number
+              currencyMask
+              [range]="[0, 9999999999]"
+              class="form-control input-input"
+              name="quantity"
+              [min]="0.01"
+              [(ngModel)]="service.model.Transaction.Quantity"
+              required
+            />
+          </div>
+          <ng-container
+            [ngSwitch]="service.model.Transaction.TransactionTypeId"
+          >
+            <ng-container *ngSwitchCase="NEW_STOCK">
+              <div class="col-md-6" input-wrapper labelName="Costo unitario:">
+                <input
+                  number
+                  currencyMask
+                  [max]="9999999999"
+                  class="form-control input-input"
+                  name="unitCost"
+                  [(ngModel)]="service.model.Transaction.UnitCost"
+                />
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <div
+                class="col-md-6"
+                input-wrapper
+                labelName="Reembolso unitario:"
+              >
+                <input
+                  number
+                  currencyMask
+                  [max]="9999999999"
+                  class="form-control input-input"
+                  name="unitSale"
+                  [(ngModel)]="service.model.Transaction.UnitSale"
+                />
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="row">
+          <div class="col-md-12" input-wrapper labelName="Comentarios:">
+            <textarea
+              type="text"
+              rows="2"
+              class="form-control input-textarea"
+              name="comments"
+              [(ngModel)]="service.model.Transaction.Comments"
+              maxlength="250"
+            ></textarea>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </form>
+  <ng-container content-type="custom-button"></ng-container>
+</form-template>

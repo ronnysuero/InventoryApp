@@ -1,0 +1,12 @@
+{
+  "config": {
+    "active": "prod",
+    "apps": [{
+      "key": "prod",
+      "api": "http://url-production/"
+    }],
+    "AuthConfig": {
+      "TokenName": "tokeninventory"
+    }
+  }
+}

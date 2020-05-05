@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "../out-tsc/app",
+    "target": "es2015",
+    "moduleResolution": "node",
+    "types": []
+  },
+  "angularCompilerOptions": {
+    "preserveWhitespaces": true
+  },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ]
+}

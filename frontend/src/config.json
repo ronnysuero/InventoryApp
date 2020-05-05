@@ -1,0 +1,13 @@
+{
+  "config": {
+    "active": "dev",
+    "apps": [{
+        "key": "dev",
+        "api": "http://localhost:14228/"
+      }
+    ],
+    "AuthConfig": {
+      "TokenName": "tokeninventoryapp"
+    }
+  }
+}

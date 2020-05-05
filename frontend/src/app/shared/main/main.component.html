@@ -1,0 +1,49 @@
+<!-- HEADER -->
+<inventory-header></inventory-header>
+
+<!-- BODY -->
+<div class="app-body">
+
+  <inventory-sidebar></inventory-sidebar>
+
+  <!-- Main content -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+      <ng-template ngFor let-breadcrumb [ngForOf]="breadcrumbs" let-last=last>
+        <li class="breadcrumb-item"
+          *ngIf="breadcrumb.label.title&&breadcrumb.url.substring(breadcrumb.url.length-1) == '/' || breadcrumb.label.title"
+          [ngClass]="{active: last}">
+          <a *ngIf="!last" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</a>
+          <span *ngIf="last">{{breadcrumb.label.title}}</span>
+        </li>
+      </ng-template>
+    </ol>
+
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+
+<footer class="app-footer">
+  <span class="float-right">
+    Desarrollado por
+    <a href="javascript:void()">Ronny Zapata</a> &copy; 2020.
+  </span>
+</footer>
+
+<!--LOADING SPINNER  -->
+<p-blockUI [blocked]="loading" baseZIndex="9999">
+  <div class="lds-css ng-scope" style="position:absolute;top:30%;left:45%">
+    <div style="width:100%;height:100%" class="lds-dual-ring">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</p-blockUI>
+
+<p-confirmDialog acceptLabel="Si" appendTo="body"></p-confirmDialog>
+
+<!-- BUTTON GO TO -->
+<button-go-to></button-go-to>

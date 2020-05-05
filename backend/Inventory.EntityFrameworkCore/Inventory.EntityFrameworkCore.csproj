@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Authors>Ronny Zapata</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Security.Core.Authentication" Version="2.0.13" />
+    <PackageReference Include="UtilsCore.EFCore" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inventory.Entity\Inventory.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

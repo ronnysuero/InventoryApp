@@ -1,0 +1,20 @@
+[
+  {
+    "Project": "Inventory.Service",
+    "Version": "1.0.0.0",
+    "Culture": "neutral",
+    "PublicKeyToken": "null",
+    "Services": {
+      "areas": "AreaService",
+      "countries": "CountryService",
+      "items": "ItemService",
+      "locations": "LocationService",
+      "manufacturers": "ManufacturerService",
+      "states": "StateService",
+      "transactions": "TransactionService",
+      "transactionTypes": "TransactionTypeService",
+      "transfers": "TransferService",
+      "reports": "ReportService"
+    }
+  }
+]

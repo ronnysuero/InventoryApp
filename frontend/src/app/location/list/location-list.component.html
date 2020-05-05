@@ -1,0 +1,65 @@
+<list-template
+  [requestSetting]="service.requestSetting"
+  [pgRowsPerPage]="service.rowsPerPage"
+  listTitle="Almacenes"
+  #list
+>
+  <ng-container content-type="toolbar"></ng-container>
+  <p-table
+    [value]="service.data"
+    [autoLayout]="true"
+    styleClass="table table-bordered"
+    [responsive]="true"
+    selectionMode="single"
+    [(selection)]="service.current"
+    dataKey="LocationId"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 120px;">
+          Código
+        </th>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Dirección
+        </th>
+        <th class="actions-button">
+          <button
+            container="body"
+            (click)="service.load()"
+            type="button"
+            class="btn btn-secondary btn-sm"
+          >
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+          </button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr [pSelectableRow]="item">
+        <td style="width: 120px;">{{ item.LocationId }}</td>
+        <td>{{ item.Name }}</td>
+        <td>{{ item.Address }}</td>
+        <td class="actions-button">
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            (click)="list.edit(item)"
+          >
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </button>
+          <button
+            class="btn btn-danger btn-sm btn-delete"
+            type="button"
+            (click)="list.delete(item)"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <br />
+</list-template>

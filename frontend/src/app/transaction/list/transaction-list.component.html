@@ -1,0 +1,92 @@
+<list-template
+  [requestSetting]="service.requestSetting"
+  [pgRowsPerPage]="service.rowsPerPage"
+  listTitle="Transacciones"
+  #list
+>
+  <ng-container content-type="toolbar">
+    <div class="row">
+      <div class="col-md-6" input-wrapper labelName="Almacén:">
+        <ng-select
+          name="location"
+          placeholder="Seleccionar"
+          class="custom"
+          [items]="service.cacheData.locations.List"
+          bindLabel="Name"
+          bindValue="LocationId"
+          (change)="service.loadByLocation()"
+          [(ngModel)]="service.locationId"
+          notFoundText="Sin registros"
+          [clearable]="true"
+        >
+        </ng-select>
+      </div>
+      <div class="col-md-6" *ngIf="service.locationId">
+        <transfer></transfer>
+      </div>
+    </div>
+  </ng-container>
+  <p-table
+    [value]="service.data"
+    [autoLayout]="true"
+    styleClass="table table-bordered"
+    [responsive]="true"
+    selectionMode="single"
+    [(selection)]="service.current"
+    dataKey="TransactionId"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 120px;">Tipo</th>
+        <th>Fecha</th>
+        <th>Almacén</th>
+        <th>Usuario</th>
+        <th>Costo unitario</th>
+        <th>Venta unitaria</th>
+        <th>Cantidad</th>
+        <th>Costo promedio</th>
+        <th class="actions-button">
+          <button
+            container="body"
+            (click)="service.load()"
+            type="button"
+            class="btn btn-secondary btn-sm"
+          >
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+          </button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr [pSelectableRow]="item">
+        <td style="width: 120px;">
+          {{ item.TransactionTypeName }}
+        </td>
+        <td>{{ item.TransactionDate | date: "dd/MM/yyyy" }}</td>
+        <td>{{ item.LocationName }}</td>
+        <td>{{ item.UIN }}</td>
+        <td>{{ item.UnitCost | number: "1.2-2" }}</td>
+        <td>{{ item.UnitSale | number: "1.2-2" }}</td>
+        <td>{{ item.Quantity | number: "1.2-2" }}</td>
+        <td>{{ item.AverageCost | number: "1.2-2" }}</td>
+        <td class="actions-button">
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            (click)="edit(item, list)"
+          >
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </button>
+          <button
+            class="btn btn-danger btn-sm btn-delete"
+            type="button"
+            (click)="list.delete(item)"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <br />
+</list-template>

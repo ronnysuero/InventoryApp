@@ -1,0 +1,243 @@
+button {
+  border-radius: 0;
+}
+
+.img-thumbnail {
+  border-radius: 0;
+}
+
+kbd {
+  border-radius: 0;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.form-control-sm {
+  border-radius: 0;
+}
+
+.form-control-lg {
+  border-radius: 0;
+}
+
+.valid-tooltip {
+  border-radius: 0;
+}
+
+.invalid-tooltip {
+  border-radius: 0;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn-lg,
+.btn-group-lg>.btn {
+  border-radius: 0;
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+  border-radius: 0;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+}
+
+.input-group-text {
+  border-radius: 0;
+}
+
+.input-group-lg>.form-control,
+.input-group-lg>.custom-select,
+.input-group-lg>.input-group-prepend>.input-group-text,
+.input-group-lg>.input-group-append>.input-group-text,
+.input-group-lg>.input-group-prepend>.btn,
+.input-group-lg>.input-group-append>.btn {
+  border-radius: 0;
+}
+
+.input-group-sm>.form-control,
+.input-group-sm>.custom-select,
+.input-group-sm>.input-group-prepend>.input-group-text,
+.input-group-sm>.input-group-append>.input-group-text,
+.input-group-sm>.input-group-prepend>.btn,
+.input-group-sm>.input-group-append>.btn {
+  border-radius: 0;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0;
+}
+
+.custom-radio .custom-control-label::before {
+  border-radius: 50%;
+}
+
+.custom-switch .custom-control-label::before {
+  border-radius: 0;
+}
+
+.custom-switch .custom-control-label::after {
+  border-radius: 0;
+}
+
+.custom-select {
+  border-radius: 0;
+}
+
+.custom-file-label {
+  border-radius: 0;
+}
+
+.custom-file-label::after {
+  border-radius: 0 0 0 0;
+}
+
+.custom-range::-webkit-slider-thumb {
+  border-radius: 1rem;
+}
+
+.custom-range::-webkit-slider-runnable-track {
+  border-radius: 1rem;
+}
+
+.custom-range::-moz-range-thumb {
+  border-radius: 1rem;
+}
+
+.custom-range::-moz-range-track {
+  border-radius: 1rem;
+}
+
+.custom-range::-ms-thumb {
+  border-radius: 1rem;
+}
+
+.custom-range::-ms-fill-lower {
+  border-radius: 1rem;
+}
+
+.custom-range::-ms-fill-upper {
+  border-radius: 1rem;
+}
+
+.nav-pills .nav-link {
+  border-radius: 0;
+}
+
+.navbar-toggler {
+  border-radius: 0;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.card-header:first-child {
+  border-radius: calc(0 - 1px) calc(0 - 1px) 0 0;
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 calc(0 - 1px) calc(0 - 1px);
+}
+
+.card-img {
+  border-radius: calc(0 - 1px);
+}
+
+.accordion>.card:not(:first-of-type) .card-header:first-child {
+  border-radius: 0;
+}
+
+.accordion>.card:not(:first-of-type):not(:last-of-type) {
+  border-radius: 0;
+}
+
+.breadcrumb {
+  border-radius: 0;
+}
+
+.pagination {
+  border-radius: 0;
+}
+
+.badge {
+  border-radius: 0;
+}
+
+.badge-pill {
+  border-radius: 10rem;
+}
+
+.jumbotron {
+  border-radius: 0;
+}
+
+.jumbotron-fluid {
+  border-radius: 0;
+}
+
+.alert {
+  border-radius: 0;
+}
+
+.progress {
+  border-radius: 0;
+}
+
+.list-group-flush .list-group-item {
+  border-radius: 0;
+}
+
+.toast {
+  border-radius: 0;
+}
+
+.modal-content {
+  border-radius: 0;
+}
+
+.tooltip-inner {
+  border-radius: 0;
+}
+
+.popover {
+  border-radius: 0;
+}
+
+.spinner-border {
+  border-radius: 50%;
+}
+
+.spinner-grow {
+  border-radius: 50%;
+}
+
+.rounded-sm {
+  border-radius: 0 !important;
+}
+
+.rounded {
+  border-radius: 0 !important;
+}
+
+.rounded-lg {
+  border-radius: 0 !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.rounded-0 {
+  border-radius: 0 !important;
+}

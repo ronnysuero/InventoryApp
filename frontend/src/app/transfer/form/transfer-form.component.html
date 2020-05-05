@@ -1,0 +1,186 @@
+<ng-container *ngIf="service.type == TRANSFER_INVENTORY; else REMOVE_EXISTING">
+  <form-template
+    [adding]="service.state == service.MODEL_STATE.Add"
+    [busy]="service.busy"
+    [(okAndNew)]="service.saveAndNew"
+    [showOkAndNew]="false"
+    formTitle="Agregar nueva transferencia"
+    [form]="crudForm"
+    [scrollTopOnInit]="false"
+  >
+    <form #crudForm="ngForm">
+      <div class="row" *ngIf="service.state == service.MODEL_STATE.Add">
+        <div class="col-md-6" input-wrapper labelName="Almacén destino:">
+          <ng-select
+            acFocus
+            name="locationTo"
+            placeholder="Seleccionar"
+            class="custom"
+            [items]="service.cacheData.locations.List"
+            bindLabel="Name"
+            bindValue="LocationId"
+            [(ngModel)]="service.model.LocationToId"
+            notFoundText="Sin registros"
+            [clearable]="false"
+            required
+          >
+          </ng-select>
+        </div>
+        <div class="col-md-6" input-wrapper labelName="Disponible en stock:">
+          <label class="form-control">{{
+            service.quantity | number: "1.2-2"
+          }}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" input-wrapper labelName="Fecha:">
+          <div class="input-group">
+            <input
+              ngbDatepicker
+              class="form-control"
+              placeholder="dd/mm/yyyy"
+              name="fechainicio"
+              [(ngModel)]="service.model.TransactionDate"
+              #transactionDate="ngbDatepicker"
+              required
+            />
+            <span class="input-group-btn">
+              <button
+                type="button"
+                (click)="transactionDate.toggle()"
+                class="pointer btn btn-outline-primary btn-search"
+              >
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6" input-wrapper labelName="Cantidad:">
+          <input
+            number
+            currencyMask
+            [range]="[0, 9999999999]"
+            class="form-control input-input"
+            name="quantity"
+            [min]="0.01"
+            [max]="service.quantity"
+            [(ngModel)]="service.model.Quantity"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" input-wrapper labelName="Comentarios:">
+          <textarea
+            type="text"
+            rows="2"
+            class="form-control input-textarea"
+            name="comments"
+            [(ngModel)]="service.model.Comments"
+            maxlength="250"
+          ></textarea>
+        </div>
+      </div>
+    </form>
+  </form-template>
+</ng-container>
+<ng-template #REMOVE_EXISTING>
+  <form-template
+    [adding]="service.state == service.MODEL_STATE.Add"
+    [busy]="service.busy"
+    [(okAndNew)]="service.saveAndNew"
+    [showOkAndNew]="false"
+    formTitle="Remover de existencia"
+    [form]="crudForm"
+    [scrollTopOnInit]="false"
+  >
+    <form #crudForm="ngForm">
+      <div class="row">
+        <div class="col-md-6" input-wrapper labelName="Fecha:">
+          <div class="input-group">
+            <input
+              ngbDatepicker
+              class="form-control"
+              placeholder="dd/mm/yyyy"
+              name="fechainicio"
+              [(ngModel)]="service.model.TransactionDate"
+              #transactionDate="ngbDatepicker"
+              required
+            />
+            <span class="input-group-btn">
+              <button
+                type="button"
+                (click)="transactionDate.toggle()"
+                class="pointer btn btn-outline-primary btn-search"
+              >
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div
+          class="col-md-6"
+          input-wrapper
+          labelName="Motivo:"
+          *ngIf="service.state == service.MODEL_STATE.Add"
+        >
+          <ng-select
+            name="transactionType"
+            placeholder="Seleccionar"
+            class="custom"
+            [items]="service.cacheData.defaultData.List.transactions"
+            bindLabel="Name"
+            bindValue="TransactionTypeId"
+            [(ngModel)]="service.model.TransactionTypeId"
+            notFoundText="Sin registros"
+            [clearable]="false"
+            required
+          >
+          </ng-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" input-wrapper labelName="Cantidad:">
+          <input
+            number
+            currencyMask
+            [range]="[0, 9999999999]"
+            class="form-control input-input"
+            name="quantity"
+            [min]="0.01"
+            [max]="service.quantity"
+            [(ngModel)]="service.model.Quantity"
+            required
+          />
+        </div>
+        <div
+          class="col-md-6"
+          input-wrapper
+          labelName="Venta unitaria:"
+          *ngIf="service.model.TransactionTypeId == CUSTOMER_SALE"
+        >
+          <input
+            number
+            currencyMask
+            [range]="[0, 9999999999]"
+            class="form-control input-input"
+            name="unitSale"
+            [(ngModel)]="service.model.UnitSale"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" input-wrapper labelName="Comentarios:">
+          <textarea
+            type="text"
+            rows="2"
+            class="form-control input-textarea"
+            name="comments"
+            [(ngModel)]="service.model.Comments"
+            maxlength="250"
+          ></textarea>
+        </div>
+      </div>
+    </form>
+  </form-template>
+</ng-template>

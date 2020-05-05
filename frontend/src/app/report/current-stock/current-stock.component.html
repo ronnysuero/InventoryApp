@@ -1,0 +1,72 @@
+<p-table
+  [value]="data"
+  [autoLayout]="true"
+  styleClass="table table-bordered"
+  [responsive]="true"
+  selectionMode="single"
+  dataKey="LocationName"
+>
+  <ng-template pTemplate="caption">
+    <div class="row">
+      <div class="col-md-6" style="text-align: left;"></div>
+      <div class="col-md-6" style="text-align: right;">
+        <button type="button" (click)="exportExcel()" class="btn btn-success">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Artículo</th>
+      <th><span class="pull-right">En stock actual</span></th>
+      <th><span class="pull-right">Costo promedio actual</span></th>
+      <th><span class="pull-right">Valor actual</span></th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-item
+    let-rowIndex="rowIndex"
+    let-expanded="expanded"
+  >
+    <tr
+      class="ui-widget-header"
+      *ngIf="rowGroupMetadata[item.LocationName].index === rowIndex"
+    >
+      <td colspan="4">
+        <a href="#" [pRowToggler]="item">
+          <i
+            [ngClass]="
+              expanded
+                ? 'pi pi-fw pi-chevron-circle-down'
+                : 'pi pi-fw pi-chevron-circle-right'
+            "
+            style="vertical-align: middle; padding-bottom: 0.1em;"
+          ></i>
+          <span>{{ item.LocationName }}</span>
+        </a>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-item let-rowIndex="rowIndex">
+    <tr>
+      <td>{{ item.Name }}</td>
+      <td>
+        <span class="pull-right">
+          {{ item.StockCount | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ item.AverageCost | number: "1.2-2" }}
+        </span>
+      </td>
+      <td>
+        <span class="pull-right">
+          {{ item.CurrenyValue | number: "1.2-2" }}
+        </span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

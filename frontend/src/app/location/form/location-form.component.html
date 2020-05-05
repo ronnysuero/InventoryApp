@@ -1,0 +1,58 @@
+<form-template
+  [adding]="service.state == service.MODEL_STATE.Add"
+  [busy]="service.busy"
+  [(okAndNew)]="service.saveAndNew"
+  [showOkAndNew]="false"
+  [formTitle]="
+    service.state == service.MODEL_STATE.Add
+      ? 'Agregar nuevo almacén'
+      : 'Editar almacén'
+  "
+  [form]="crudForm"
+>
+  <form #crudForm="ngForm">
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Nombre:">
+        <input
+          acFocus
+          type="text"
+          maxlength="30"
+          class="form-control input-input"
+          name="nombre"
+          [(ngModel)]="service.model.Name"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Provincia:">
+        <ng-select
+          name="stateId"
+          [clearable]="false"
+          class="custom"
+          [items]="service.cacheData.states.List"
+          bindLabel="Name"
+          bindValue="StateId"
+          [(ngModel)]="service.model.StateId"
+          notFoundText="Sin registros"
+          placeholder="Seleccionar"
+          required
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" input-wrapper labelName="Dirección:">
+        <textarea
+          type="text"
+          rows="2"
+          class="form-control input-textarea"
+          name="address"
+          [(ngModel)]="service.model.Address"
+          maxlength="250"
+        ></textarea>
+      </div>
+    </div>
+  </form>
+  <ng-container content-type="custom-button"></ng-container>
+</form-template>
